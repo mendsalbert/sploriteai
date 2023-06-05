@@ -16,6 +16,8 @@ import useUserSubscription from '../utils/useUserSubscription';
 import { getCourseHistory } from './reducersSlices/coursReducer';
 import Head from 'next/head';
 import getUserIdByEmail from '@/firebase/getEmail';
+import detectEthereumProvider from '@metamask/detect-provider';
+import { ethers } from 'ethers';
 
 function PageHome() {
   ReactGA.initialize('G-40852TP7K2');
@@ -127,6 +129,34 @@ function PageHome() {
     getuserid();
   }, []);
 
+  useEffect(() => {
+    connectToMetamask();
+  }, [user]);
+
+  async function connectToMetamask() {
+    // Detect the MetaMask provider
+    const provider = (await detectEthereumProvider()) as any;
+
+    if (provider) {
+      // Request access to the user's MetaMask accounts
+      await provider.request({ method: 'eth_requestAccounts' });
+
+      // Create an ethers.js provider using MetaMask
+      const ethersProvider = new ethers.providers.Web3Provider(provider);
+
+      // Get the signer (current account) from the provider
+      const signer = ethersProvider.getSigner();
+
+      // You can now use the signer to send transactions or interact with contracts
+      console.log('Connected to MetaMask');
+
+      console.log('Current account:', await signer.getAddress());
+
+      localStorage.setItem('isConnected', 'true');
+    } else {
+      console.log('Metamask is not installed');
+    }
+  }
   return (
     <>
       <head>

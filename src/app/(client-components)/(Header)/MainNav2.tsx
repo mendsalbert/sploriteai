@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+'use client';
+import React, { FC, useEffect, useState } from 'react';
 import Logo from '@/shared/Logo';
 import MenuBar from '@/shared/MenuBar';
 import LangDropdown from './LangDropdown';
@@ -17,6 +18,13 @@ export interface MainNav2Props {
 
 const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
   const { user, error, isLoading } = useUser();
+  const [isConnected, setIsConnected] = useState(false);
+  console.log(isConnected);
+
+  useEffect(() => {
+    let isConnect = localStorage.getItem('isConnected');
+    setIsConnected(Boolean(isConnect));
+  }, [user]);
 
   return (
     <div className={`MainNav2 relative z-10 ${className}`}>
@@ -38,6 +46,16 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
           <div className='hidden space-x-1 lg:flex'>
             {/* <TemplatesDropdown /> */}
             {/* <LangDropdown /> */}
+            {/* <ConnectWallet theme='dark' /> */}
+            {/* 
+            {isConnected ? (
+              <div>
+                Connected to {address}
+                <button onClick={() => disconnect()}>Disconnect</button>
+              </div>
+            ) : (
+              <button onClick={() => connect()}>Connect Wallet</button>
+            )}
             {!user ? (
               <Link
                 href={'/api/auth/login'}
@@ -47,7 +65,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
               </Link>
             ) : (
               ''
-            )}
+            )} */}
 
             {user ? <AvatarDropdown user={user} /> : ''}
             {/* <NotifyDropdown /> */}

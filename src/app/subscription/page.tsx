@@ -13,7 +13,7 @@ import { PaymentModal } from '@/components/Payment/PaymentModal';
 import { PaymentCancleModal } from '@/components/Payment/PaymentCancleModal';
 import { loadStripe } from '@stripe/stripe-js';
 import updateData from '@/firebase/updateData';
-
+import { subscribe } from '../../../utils/contract/queries';
 export interface PageSubcriptionProps {}
 
 export interface PricingItem {
@@ -206,30 +206,29 @@ const PageSubcription: FC<PageSubcriptionProps> = () => {
             </div>
           </div>
         </div>
-        {user_?.isSubscribed ? (
-          <ButtonPrimary
-            className='mt-5 w-full'
-            onClick={async () => {
-              const confirm = window.confirm('Are you sure you want to cancel your subscription?');
-              if (confirm) {
-                // User clicked OK, cancel subscription
-                await updateData('users', user.sub, {
-                  isSubscribed: false,
-                  stripeSubscriptionStatus: 'cancelled',
-                });
-                window.location.href = 'https://billing.stripe.com/p/login/14k5lt0S9ccZa7S7ss';
-              }
-            }}
-          >
-            Cancel Subscription
-          </ButtonPrimary>
-        ) : (
-          <form action='/api/checkout_sessions' method='POST'>
-            <ButtonPrimary type='submit' className='mt-5 w-full'>
-              {'Subscribe'}
-            </ButtonPrimary>
-          </form>
-        )}
+        {/* {user_?.isSubscribed ? ( */}
+        <ButtonPrimary
+          className='mt-5 w-full'
+          onClick={async () => {
+            alert('working');
+            let res = await subscribe();
+            console.log(res);
+
+            // alert('working');
+            // const confirm = window.confirm('Are you sure you want to cancel your subscription?');
+            if (confirm) {
+              // User clicked OK, cancel subscription
+              await updateData('users', user.sub, {
+                isSubscribed: true,
+                stripeSubscriptionStatus: 'cancelled',
+              });
+              window.location.href = '/success';
+            }
+          }}
+        >
+          {/* Cancel Subscription */}
+          Subscribe
+        </ButtonPrimary>
 
         {/* <form action='/api/checkout_sessions' method='POST'>
           <section>
@@ -266,8 +265,8 @@ const PageSubcription: FC<PageSubcriptionProps> = () => {
           </style>
         </form> */}
       </section>
-      {IsOpen && <PaymentModal onClose={() => setIsOpen(false)} />}
-      {IsOpenCancel && <PaymentCancleModal onClose={() => setisOpenCancel(false)} />}
+      {/* {IsOpen && <PaymentModal onClose={() => setIsOpen(false)} />} */}
+      {/* {IsOpenCancel && <PaymentCancleModal onClose={() => setisOpenCancel(false)} />} */}
     </div>
   );
 };

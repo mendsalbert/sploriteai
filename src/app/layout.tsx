@@ -1,3 +1,4 @@
+// 'use client';
 import { Poppins } from 'next/font/google';
 import SiteHeader from './(client-components)/(Header)/SiteHeader';
 import ClientCommons from './ClientCommons';
@@ -9,7 +10,10 @@ import Footer from '@/components/Footer';
 import FooterNav from '@/components/FooterNav';
 import Providers from './Providers';
 import Head from 'next/head';
+// import { ThirdwebProvider } from '@thirdweb-dev/react';
+import { ethers } from 'ethers';
 // import ReactGA from 'react-ga';
+import detectEthereumProvider from '@metamask/detect-provider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,8 +21,23 @@ const poppins = Poppins({
   weight: ['100', '300', '400', '500', '600', '700', '800'],
 });
 
+// import '@rainbow-me/rainbowkit/styles.css';
+// import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+// import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
+// import { WagmiConfig, createConfig, mainnet } from 'wagmi';
+// import { createPublicClient, http } from 'viem';
+
+// const { chains } = configureChains([mainnet, polygon, optimism, arbitrum]);
+
+// const config = createConfig({
+//   autoConnect: true,
+//   publicClient: createPublicClient({
+//     chain: mainnet,
+//     transport: http(),
+//   }),
+// });
+
 export default async function RootLayout({ children, params }: { children: React.ReactNode; params: any }) {
-  // ReactGA.initialize('G-40852TP7K2');
   return (
     <html lang='en' className={poppins.className}>
       <Head>
@@ -30,6 +49,9 @@ export default async function RootLayout({ children, params }: { children: React
       </Head>
 
       <body className='relative bg-white text-base text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200'>
+        {/* <ThirdwebProvider activeChain={activeChain}> */}
+        {/* <WagmiConfig config={config}> */}
+        {/* <RainbowKitProvider chains={}> */}
         <Providers>
           <ClientCommons />
           <SiteHeader />
@@ -37,6 +59,9 @@ export default async function RootLayout({ children, params }: { children: React
           <FooterNav />
           <Footer />
         </Providers>
+        {/* </RainbowKitProvider> */}
+        {/* </WagmiConfig> */}
+        {/* </ThirdwebProvider> */}
       </body>
       {/* <script type='text/javascript'>
         {` var lock = new Auth0Lock(" UiTWI15Fm0V7GpLZutKLK2VXe1GjGsRo", "https://auth0.splorite.com", {
