@@ -12,7 +12,8 @@
 /.next/
 /out/
 .next
-
+secret.txt
+./secret.txt
 # production
 /build
 
