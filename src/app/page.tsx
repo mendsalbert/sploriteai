@@ -144,12 +144,29 @@ function PageHome() {
       // Create an ethers.js provider using MetaMask
       const ethersProvider = new ethers.providers.Web3Provider(provider);
 
+      // Switch to the Mumbai network (testnet)
+      const network = {
+        chainId: '0x13881', // Chain ID: 80001 in hexadecimal
+        chainName: 'Mumbai',
+        nativeCurrency: {
+          name: 'MATIC',
+          symbol: 'MATIC',
+          decimals: 18,
+        },
+        rpcUrls: ['https://rpc-mumbai.maticvigil.com'], // Mumbai RPC URL
+        blockExplorerUrls: ['https://mumbai.polygonscan.com'], // Mumbai block explorer URL
+      };
+
+      await provider.request({
+        method: 'wallet_addEthereumChain',
+        params: [network],
+      });
+
       // Get the signer (current account) from the provider
       const signer = ethersProvider.getSigner();
 
       // You can now use the signer to send transactions or interact with contracts
       console.log('Connected to MetaMask');
-
       console.log('Current account:', await signer.getAddress());
 
       localStorage.setItem('isConnected', 'true');
@@ -157,6 +174,7 @@ function PageHome() {
       console.log('Metamask is not installed');
     }
   }
+
   return (
     <>
       <head>
