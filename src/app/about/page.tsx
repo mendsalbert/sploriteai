@@ -17,12 +17,12 @@ const PageAbout: FC<PageAboutProps> = ({}) => {
       <BgGlassmorphism />
 
       <div className='container space-y-16 py-16 lg:space-y-28 lg:py-28'>
-        <SectionHero
+        {/* <SectionHero
           rightImg={rightImg}
           heading='👋 About Us.'
           btnText=''
           subHeading='We’re impartial and independent, and every day we create distinctive, world-class programmes and content which inform, educate and entertain millions of people in the around the world.'
-        />
+        /> */}
 
         <SectionFounder />
         <div className='relative py-16'>
