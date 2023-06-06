@@ -8,7 +8,7 @@
 <p align="center">
     <a href="https://www.youtube.com/watch?v=FlKs6_5q5hk" title="">🖥️ Video</a>
     .
-    <a href="https://vidispark.vercel.app/video/2r3BsJGm5upgoSUIZxPL" title="">🔗 Website</a>
+    <a href="sploriteai.vercel.app" title="">🔗 Website</a>
     ·
     <a href="https://github.com/mendsalbert/sploriteai" title="">📂 Repo</a>
     ·
