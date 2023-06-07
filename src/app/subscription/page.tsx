@@ -210,7 +210,7 @@ const PageSubcription: FC<PageSubcriptionProps> = () => {
         <ButtonPrimary
           className='mt-5 w-full'
           onClick={async () => {
-            alert('working');
+            // alert('working');
             let res = await subscribe();
             console.log(res);
 

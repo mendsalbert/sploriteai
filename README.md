@@ -6,9 +6,9 @@
 <h1 align="center">Splorite AI</h1>
 
 <p align="center">
-    <a href="https://www.youtube.com/watch?v=FlKs6_5q5hk" title="">🖥️ Video</a>
+    <a href="https://youtu.be/jUT-sgjIfaQ" title="">🖥️ Video</a>
     .
-    <a href="sploriteai.vercel.app" title="">🔗 Website</a>
+    <a href="https://sploriteai.vercel.app/" title="">🔗 Website</a>
     ·
     <a href="https://github.com/mendsalbert/sploriteai" title="">📂 Repo</a>
     ·
